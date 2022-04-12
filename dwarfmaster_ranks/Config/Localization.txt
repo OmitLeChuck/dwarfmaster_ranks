@@ -19,4 +19,4 @@ promotion08,,,,,"Mehr kann man schon fast gar nicht erreichen! Glückwunsch Herr
 rank09,,,,,"Admiral","Admiral"
 promotion09,,,,,"Großartig, wie du Karriere machst! Ich salutiere Herr Admiral!","Great how you make your career! I salute you, Admiral!"
 rank10,,,,,"Botschafter","Ambassador"
-promotion09,,,,,"Mehr geht nun wirklich nicht! Du bist an der der Spitze angelangt Herr Botschafter!","More is really not possible! You have reached the top, Mr. Ambassador!"
+promotion10,,,,,"Mehr geht nun wirklich nicht! Du bist an der der Spitze angelangt Herr Botschafter!","More is really not possible! You have reached the top, Mr. Ambassador!"
