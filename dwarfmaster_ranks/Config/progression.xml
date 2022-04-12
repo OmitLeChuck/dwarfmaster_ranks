@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- enter here the maximum player level that can be reached -->
+<configs>
+	<set xpath="/progression/level/@max_level">1000</set>
+</configs>

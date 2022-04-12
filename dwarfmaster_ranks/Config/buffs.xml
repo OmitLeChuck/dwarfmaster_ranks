@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+    <!--
+    This part is used to set the rank. It is important to enter exactly the right values here, so that several ranks are not active at the same time.
+    This is an extension of the standard status check which is executed approximately every 2 seconds.
+    GTE = greater then and equals
+    LTE = les than and equals
+    GT = greater then
+    LT = less then
+    Of course, more ranks can be added. But this depends on maximum level defined in progression.xml.
+    -->
+
+    <append xpath="//buff[@name='buffStatusCheck02']">
+        <effect_group name="setRank">
+            <!-- the first rank does not need a validation for 'greater than'. this is the rank that is active at the first spawn in the game -->
+            <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffLevel01">
+                <requirement name="!HasBuff" buff="buffLevel01"/>
+                <requirement name="PlayerLevel" operation="LTE" value="6"/>
+            </triggered_effect>
+            <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffLevel02">
+                <requirement name="!HasBuff" buff="buffLevel02"/>
+                <requirement name="PlayerLevel" operation="GTE" value="7"/>
+                <requirement name="PlayerLevel" operation="LTE" value="12"/>
+            </triggered_effect>
+            <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffLevel03">
+                <requirement name="!HasBuff" buff="buffLevel03"/>
+                <requirement name="PlayerLevel" operation="GTE" value="13"/>
+                <requirement name="PlayerLevel" operation="LTE" value="22"/>
+            </triggered_effect>
+            <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffLevel04">
+                <requirement name="!HasBuff" buff="buffLevel04"/>
+                <requirement name="PlayerLevel" operation="GTE" value="23"/>
+                <requirement name="PlayerLevel" operation="LTE" value="41"/>
+            </triggered_effect>
+            <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffLevel05">
+                <requirement name="!HasBuff" buff="buffLevel05"/>
+                <requirement name="PlayerLevel" operation="GTE" value="42"/>
+                <requirement name="PlayerLevel" operation="LTE" value="77"/>
+            </triggered_effect>
+            <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffLevel06">
+                <requirement name="!HasBuff" buff="buffLevel06"/>
+                <requirement name="PlayerLevel" operation="GTE" value="78"/>
+                <requirement name="PlayerLevel" operation="LTE" value="146"/>
+            </triggered_effect>
+            <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffLevel07">
+                <requirement name="!HasBuff" buff="buffLevel07"/>
+                <requirement name="PlayerLevel" operation="GTE" value="147"/>
+                <requirement name="PlayerLevel" operation="LTE" value="277"/>
+            </triggered_effect>
+            <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffLevel08">
+                <requirement name="!HasBuff" buff="buffLevel08"/>
+                <requirement name="PlayerLevel" operation="GTE" value="278"/>
+                <requirement name="PlayerLevel" operation="LTE" value="526"/>
+            </triggered_effect>
+            <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffLevel09">
+                <requirement name="!HasBuff" buff="buffLevel09"/>
+                <requirement name="PlayerLevel" operation="GTE" value="527"/>
+                <requirement name="PlayerLevel" operation="LTE" value="813"/>
+            </triggered_effect>
+            <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffLevel10">
+                <requirement name="!HasBuff" buff="buffLevel10"/>
+                <requirement name="PlayerLevel" operation="GTE" value="814"/>
+                <requirement name="PlayerLevel" operation="LTE" value="1000"/>
+            </triggered_effect>
+        </effect_group>
+
+    </append>
+    <append xpath="/buffs">
+        <!-- here are the actual ranks. look in the Localization.txt and adjust them to fit your needs
+        You may also want to customize the icon or even the color of the icon. Currently, it goes from light yellow to dark red and the icon is a star.
+        in Localization.txt you find a set off keys that will translate the rank and the messages.
+
+        tooltip_key [promotion(01-10)] > this message will be shown as tool belt message when the buff is going to be active
+        display_value_key [rank(01-10)] > the name for the rank, which is stacked as a shown buff and listed in the character info panel
+        -->
+        <buff name="buffLevel01" name_key="rankName" remove_on_death="false" tooltip_key="promotion01"
+              icon="server_favorite" icon_color="255,255,104">
+            <display_value_key value="rank01"/>
+            <display_value value="rank01"/>
+            <!-- when you add new ranks, don't forget to note the newly added ones here as well. -->
+            <effect_group name="deleteOtherRanks">
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel02">
+                    <requirement name="HasBuff" buff="buffLevel02"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel03">
+                    <requirement name="HasBuff" buff="buffLevel03"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel04">
+                    <requirement name="HasBuff" buff="buffLevel04"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel05">
+                    <requirement name="HasBuff" buff="buffLevel05"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel06">
+                    <requirement name="HasBuff" buff="buffLevel06"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel07">
+                    <requirement name="HasBuff" buff="buffLevel07"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel08">
+                    <requirement name="HasBuff" buff="buffLevel08"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel09">
+                    <requirement name="HasBuff" buff="buffLevel09"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel10">
+                    <requirement name="HasBuff" buff="buffLevel10"/>
+                </triggered_effect>
+            </effect_group>
+        </buff>
+        <buff name="buffLevel02" name_key="rankName" remove_on_death="false" tooltip_key="promotion02"
+              icon="server_favorite" icon_color="255,227,92">
+            <display_value_key value="rank02"/>
+            <display_value value="rank02"/>
+            <effect_group name="deleteOtherRanks">
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel01">
+                    <requirement name="HasBuff" buff="buffLevel01"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel03">
+                    <requirement name="HasBuff" buff="buffLevel03"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel04">
+                    <requirement name="HasBuff" buff="buffLevel04"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel05">
+                    <requirement name="HasBuff" buff="buffLevel05"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel06">
+                    <requirement name="HasBuff" buff="buffLevel06"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel07">
+                    <requirement name="HasBuff" buff="buffLevel07"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel08">
+                    <requirement name="HasBuff" buff="buffLevel08"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel09">
+                    <requirement name="HasBuff" buff="buffLevel09"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel10">
+                    <requirement name="HasBuff" buff="buffLevel10"/>
+                </triggered_effect>
+            </effect_group>
+        </buff>
+        <buff name="buffLevel03" name_key="rankName" remove_on_death="false" tooltip_key="promotion03"
+              icon="server_favorite" icon_color="255,198,81">
+            <display_value_key value="rank03"/>
+            <display_value value="rank03"/>
+            <effect_group name="deleteOtherRanks">
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel01">
+                    <requirement name="HasBuff" buff="buffLevel01"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel02">
+                    <requirement name="HasBuff" buff="buffLevel02"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel04">
+                    <requirement name="HasBuff" buff="buffLevel04"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel05">
+                    <requirement name="HasBuff" buff="buffLevel05"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel06">
+                    <requirement name="HasBuff" buff="buffLevel06"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel07">
+                    <requirement name="HasBuff" buff="buffLevel07"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel08">
+                    <requirement name="HasBuff" buff="buffLevel08"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel09">
+                    <requirement name="HasBuff" buff="buffLevel09"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel10">
+                    <requirement name="HasBuff" buff="buffLevel10"/>
+                </triggered_effect>
+            </effect_group>
+        </buff>
+        <buff name="buffLevel04" name_key="rankName" remove_on_death="false" tooltip_key="promotion04"
+              icon="server_favorite" icon_color="255,170,69">
+            <display_value_key value="rank04"/>
+            <display_value value="rank04"/>
+            <effect_group name="unlockRecipes">
+                <passive_effect name="RecipeTagUnlocked" operation="base_set" value="1"
+                                tags="modAugerSilencer,cowHelmet"/>
+            </effect_group>
+            <effect_group name="deleteOtherRanks">
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel01">
+                    <requirement name="HasBuff" buff="buffLevel01"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel02">
+                    <requirement name="HasBuff" buff="buffLevel02"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel03">
+                    <requirement name="HasBuff" buff="buffLevel03"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel05">
+                    <requirement name="HasBuff" buff="buffLevel05"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel06">
+                    <requirement name="HasBuff" buff="buffLevel06"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel07">
+                    <requirement name="HasBuff" buff="buffLevel07"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel08">
+                    <requirement name="HasBuff" buff="buffLevel08"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel09">
+                    <requirement name="HasBuff" buff="buffLevel09"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel10">
+                    <requirement name="HasBuff" buff="buffLevel10"/>
+                </triggered_effect>
+            </effect_group>
+        </buff>
+        <buff name="buffLevel05" name_key="rankName" remove_on_death="false" tooltip_key="promotion05"
+              icon="server_favorite" icon_color="255,142,58">
+            <display_value_key value="rank05"/>
+            <display_value value="rank05"/>
+            <effect_group name="unlockRecipes">
+                <passive_effect name="RecipeTagUnlocked" operation="base_set" value="1"
+                                tags="modAugerSilencer,cowHelmet,pumpkinHat,magnetHat,wagonWheel"/>
+            </effect_group>
+            <effect_group name="deleteOtherRanks">
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel01">
+                    <requirement name="HasBuff" buff="buffLevel01"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel02">
+                    <requirement name="HasBuff" buff="buffLevel02"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel03">
+                    <requirement name="HasBuff" buff="buffLevel03"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel04">
+                    <requirement name="HasBuff" buff="buffLevel04"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel06">
+                    <requirement name="HasBuff" buff="buffLevel06"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel07">
+                    <requirement name="HasBuff" buff="buffLevel07"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel08">
+                    <requirement name="HasBuff" buff="buffLevel08"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel09">
+                    <requirement name="HasBuff" buff="buffLevel09"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel10">
+                    <requirement name="HasBuff" buff="buffLevel10"/>
+                </triggered_effect>
+            </effect_group>
+        </buff>
+        <buff name="buffLevel06" name_key="rankName" remove_on_death="false" tooltip_key="promotion06"
+              icon="server_favorite" icon_color="255,113,46">
+            <display_value_key value="rank06"/>
+            <display_value value="rank06"/>
+            <!-- here you can unlock recipes or what else you can do in buffs. if you don't need something like this, just delete it -->
+            <effect_group name="unlockRecipes">
+                <passive_effect name="RecipeTagUnlocked" operation="base_set" value="1"
+                                tags="modAugerSilencer,cowHelmet,pumpkinHat,magnetHat,wagonWheel,rabbitFriend,snakeFriend,drugHalfGod,superDigger"/>
+            </effect_group>
+            <effect_group name="deleteOtherRanks">
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel01">
+                    <requirement name="HasBuff" buff="buffLevel01"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel02">
+                    <requirement name="HasBuff" buff="buffLevel02"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel03">
+                    <requirement name="HasBuff" buff="buffLevel03"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel04">
+                    <requirement name="HasBuff" buff="buffLevel04"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel05">
+                    <requirement name="HasBuff" buff="buffLevel05"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel07">
+                    <requirement name="HasBuff" buff="buffLevel07"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel08">
+                    <requirement name="HasBuff" buff="buffLevel08"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel09">
+                    <requirement name="HasBuff" buff="buffLevel09"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel10">
+                    <requirement name="HasBuff" buff="buffLevel10"/>
+                </triggered_effect>
+            </effect_group>
+        </buff>
+        <buff name="buffLevel07" name_key="rankName" remove_on_death="false" tooltip_key="promotion07"
+              icon="server_favorite" icon_color="255,85,35">
+            <display_value_key value="rank07"/>
+            <display_value value="rank07"/>
+            <effect_group name="unlockRecipes">
+                <passive_effect name="RecipeTagUnlocked" operation="base_set" value="1"
+                                tags="modAugerSilencer,cowHelmet,pumpkinHat,magnetHat,wagonWheel,rabbitFriend,snakeFriend,drugHalfGod,superDigger,vultureFriend,bigBackpack,pumpkinMan"/>
+            </effect_group>
+            <effect_group name="deleteOtherRanks">
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel01">
+                    <requirement name="HasBuff" buff="buffLevel01"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel02">
+                    <requirement name="HasBuff" buff="buffLevel02"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel03">
+                    <requirement name="HasBuff" buff="buffLevel03"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel04">
+                    <requirement name="HasBuff" buff="buffLevel04"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel05">
+                    <requirement name="HasBuff" buff="buffLevel05"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel06">
+                    <requirement name="HasBuff" buff="buffLevel06"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel08">
+                    <requirement name="HasBuff" buff="buffLevel08"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel09">
+                    <requirement name="HasBuff" buff="buffLevel09"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel10">
+                    <requirement name="HasBuff" buff="buffLevel10"/>
+                </triggered_effect>
+            </effect_group>
+        </buff>
+        <buff name="buffLevel08" name_key="rankName" remove_on_death="false" tooltip_key="promotion08"
+              icon="server_favorite" icon_color="255,57,23">
+            <display_value_key value="rank08"/>
+            <display_value value="rank08"/>
+            <effect_group name="unlockRecipes">
+                <passive_effect name="RecipeTagUnlocked" operation="base_set" value="1"
+                                tags="modAugerSilencer,cowHelmet,pumpkinHat,magnetHat,wagonWheel,rabbitFriend,snakeFriend,drugHalfGod,superDigger,vultureFriend,bigBackpack,pumpkinMan,speakerHat,wineBottle,megaMagazin"/>
+            </effect_group>
+            <effect_group name="deleteOtherRanks">
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel01">
+                    <requirement name="HasBuff" buff="buffLevel01"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel02">
+                    <requirement name="HasBuff" buff="buffLevel02"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel03">
+                    <requirement name="HasBuff" buff="buffLevel03"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel04">
+                    <requirement name="HasBuff" buff="buffLevel04"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel05">
+                    <requirement name="HasBuff" buff="buffLevel05"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel06">
+                    <requirement name="HasBuff" buff="buffLevel06"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel07">
+                    <requirement name="HasBuff" buff="buffLevel07"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel09">
+                    <requirement name="HasBuff" buff="buffLevel09"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel10">
+                    <requirement name="HasBuff" buff="buffLevel10"/>
+                </triggered_effect>
+            </effect_group>
+        </buff>
+        <buff name="buffLevel09" name_key="rankName" remove_on_death="false" tooltip_key="promotion09"
+              icon="server_favorite" icon_color="255,28,12">
+            <display_value_key value="rank09"/>
+            <display_value value="rank09"/>
+            <effect_group name="unlockRecipes">
+                <passive_effect name="RecipeTagUnlocked" operation="base_set" value="1"
+                                tags="modAugerSilencer,cowHelmet,pumpkinHat,magnetHat,wagonWheel,rabbitFriend,snakeFriend,drugHalfGod,superDigger,vultureFriend,bigBackpack,pumpkinMan,speakerHat,wineBottle,megaMagazin"/>
+            </effect_group>
+            <effect_group name="deleteOtherRanks">
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel01">
+                    <requirement name="HasBuff" buff="buffLevel01"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel02">
+                    <requirement name="HasBuff" buff="buffLevel02"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel03">
+                    <requirement name="HasBuff" buff="buffLevel03"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel04">
+                    <requirement name="HasBuff" buff="buffLevel04"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel05">
+                    <requirement name="HasBuff" buff="buffLevel05"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel06">
+                    <requirement name="HasBuff" buff="buffLevel06"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel07">
+                    <requirement name="HasBuff" buff="buffLevel07"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel08">
+                    <requirement name="HasBuff" buff="buffLevel08"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel10">
+                    <requirement name="HasBuff" buff="buffLevel10"/>
+                </triggered_effect>
+            </effect_group>
+        </buff>
+        <buff name="buffLevel10" name_key="rankName" remove_on_death="false" tooltip_key="promotion10"
+              icon="server_favorite" icon_color="255,0,0">
+            <display_value_key value="rank10"/>
+            <display_value value="rank10"/>
+            <effect_group name="unlockRecipes">
+                <passive_effect name="RecipeTagUnlocked" operation="base_set" value="1"
+                                tags="modAugerSilencer,cowHelmet,pumpkinHat,magnetHat,wagonWheel,rabbitFriend,snakeFriend,drugHalfGod,superDigger,vultureFriend,bigBackpack,pumpkinMan,speakerHat,wineBottle,megaMagazin,dwarfmasterGun"/>
+            </effect_group>
+            <effect_group name="deleteOtherRanks">
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel01">
+                    <requirement name="HasBuff" buff="buffLevel01"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel02">
+                    <requirement name="HasBuff" buff="buffLevel02"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel03">
+                    <requirement name="HasBuff" buff="buffLevel03"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel04">
+                    <requirement name="HasBuff" buff="buffLevel04"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel05">
+                    <requirement name="HasBuff" buff="buffLevel05"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel06">
+                    <requirement name="HasBuff" buff="buffLevel06"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel07">
+                    <requirement name="HasBuff" buff="buffLevel07"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel08">
+                    <requirement name="HasBuff" buff="buffLevel08"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffLevel09">
+                    <requirement name="HasBuff" buff="buffLevel10"/>
+                </triggered_effect>
+            </effect_group>
+        </buff>
+    </append>
+</configs>
